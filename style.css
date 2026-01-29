@@ -1,0 +1,85 @@
+/* Background styling */
+body {
+  color: #505050;
+  background-image: linear-gradient(180deg, #70da7b 50%, #76d57a );
+  font-family: "Quicksand", sans-serif;
+}
+
+/* Game container styling */
+#quiz-card {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  border-color: #505050;
+  background-color: white;
+  color: #505050;
+}
+
+/* Answer text styling */
+/* Removes list numbering */
+ol {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+/* Button styling */
+
+#answer-buttons * {
+  font-weight: 500;
+  color: #505050;
+  border-radius: 10px;
+  border-color: #505050;
+  transition: all 1.0s ease;
+}
+
+#btnA {
+  background-color: #BEE5B0;
+}
+
+#btnA:hover {
+  background-color: white;
+  border-color: #BEE5B0;
+}
+
+#btnB {
+  background-color: #B6E9FF;
+}
+
+#btnB:hover {
+  background-color: white;
+  border-color: #B6E9FF;
+}
+
+#btnC {
+  background-color: #f1c0ba;
+}
+
+#btnC:hover {
+  background-color: white;
+  border-color: #f1c0ba;
+}
+
+#btnD {
+  background-color: #fbecc0;
+}
+
+#btnD:hover {
+  background-color: white;
+  border-color: #fbecc0;
+}
+
+/* Progress bar styling */
+
+.progress-bar {
+  width: 0%;
+  background-color: #bddfe3;
+}
+.progress {
+  position: relative;
+  margin-left: 16px;
+}
+
+.progress-number {
+  font-size: 14px;
+  font-weight: bold;
+  z-index: 10;
+}
