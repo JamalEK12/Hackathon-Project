@@ -17,7 +17,7 @@
     <link rel="manifest" href="site.webmanifest">
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
    <!-- Quiz container -->
@@ -27,6 +27,20 @@
                 <h1 class="mb-4">Tree Quiz!</h1>
             </header>
             <div id="quiz-card" class="card p-3">
+
+    <div class="quiz-image-container">
+        <!-- 
+           ID: growth-image 
+           The JS developer can target this ID to change src based on score.
+           Alt text provides accessibility.
+        -->
+        <img 
+            src="assets/images/stage-0.webp" 
+            id="growth-image" 
+            class="quiz-image" 
+            alt="Current growth stage: Germination"
+        >
+    </div>
 
                 <!-- Question text, gets updated via JS script -->
                 <h2 id="question">Question loading...</h2>
