@@ -64,6 +64,10 @@ function renderCurrentQuestion() {
         li.innerText = `${currentData.choices[index]}`;
     });
 
+    ui.buttons.forEach((btn, index) => {
+        btn.innerText = `${currentData.choices[index]}`;
+    });
+
     // 4. Update the Progress Bar
     // Calculate percentage: ((current-1) / total) * 100
     const progressPercent = ((displayNum - 1 )/ gameState.totalQuestions) * 100;
@@ -95,6 +99,7 @@ ui.buttons.forEach((btn, index) => {
         handleButtonClick(index);
     });
 });
+
 
 // Run the initialization
 init();
