@@ -1,0 +1,114 @@
+body {
+  background: #1a1a1a;
+  color: white;
+  font-family: sans-serif;
+  overflow: hidden;
+  margin: 0;
+}
+
+.game-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.tree {
+  font-size: 80px;
+  display: inline-block;
+  transition: transform 0.5s ease-in-out;
+  transform: scale(0.2);
+  /* Initial baby tree size */
+  margin-bottom: 20px;
+  z-index: 10;
+}
+
+/* Growth animation triggered by JS */
+.tree.animate-grow {
+  animation: growPop 0.6s ease-out forwards;
+}
+
+#quiz-box {
+  background: #333;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  width: 300px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  z-index: 20;
+}
+
+.btn {
+  display: block;
+  width: 100%;
+  margin: 10px 0;
+  padding: 10px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  background-color: #555;
+  color: white;
+  font-weight: bold;
+  transition: 0.2s;
+}
+
+/* Button hover effect using CSS Transitions */
+.btn:hover {
+  background-color: #4CAF50;
+  transform: translateY(-2px);
+}
+
+.hidden {
+  display: none;
+}
+
+#victory-msg {
+  font-size: 24px;
+  color: #4CAF50;
+  text-align: center;
+  animation: fadeIn 1s ease-in;
+}
+
+#rainCanvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 5;
+}
+
+/* Tree Growth Keyframes */
+@keyframes growPop {
+  0% {
+    transform: scale(var(--prev-scale));
+  }
+
+  50% {
+    transform: scale(calc(var(--curr-scale) + 0.1));
+  }
+
+  100% {
+    transform: scale(var(--curr-scale));
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
