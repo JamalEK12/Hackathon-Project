@@ -167,7 +167,6 @@ body {
 @keyframes growPop {
   0% {
     transform: scale(var(--prev-scale));
-<<<<<<< HEAD
   }
 
   50% {
@@ -196,8 +195,6 @@ body {
 
   to {
     opacity: 0;
-=======
->>>>>>> 77a984da558be281742c1cb8a8ba021e9c8e29c1
   }
 
   50% {
