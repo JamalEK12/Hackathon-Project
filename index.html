@@ -1,12 +1,12 @@
-!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tree Savior Quiz</title>
-     <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="icon" type="image/png" href="assets/images/tree-icon.png">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="tree-icon" type="image/png" href="assets/images/tree-icon.png">
 </head>
 
 <body>
@@ -17,15 +17,20 @@
         <div id="tree-stage" class="tree">🌳</div>
 
         <div id="quiz-box">
+            <p id="score-display">Score: 0</p>
             <h2 id="question">Loading...</h2>
             <div id="options"></div>
         </div>
 
         <!-- Direct file path to play sound via the play() method.
         -->
-         <audio id="rainSound" src="assets/sounds/rain.mp3"></audio>
+        <audio id="rainSound" src="assets/sounds/rain.mp3"></audio>
 
-        <div id="victory-msg" class="hidden">Congratulations, you saved the planet! 🌍</div>
+        <div id="victory-msg" class="hidden">
+            <p>Legend... you saved the planet! 🌍</p>
+            <p id="final-score"></p>
+            <button id="restart-btn" class="btn">Plant a New Tree</button>
+        </div>
     </div>
 
     <!-- Js-Script -->
