@@ -113,4 +113,8 @@ function resetGame() {
 // NEW: Event Listener for Restart
 document.getElementById('restart-btn').onclick = resetGame;
 
+<<<<<<< HEAD
 loadQuestion();
+=======
+loadQuestion();
+>>>>>>> 77a984da558be281742c1cb8a8ba021e9c8e29c1
