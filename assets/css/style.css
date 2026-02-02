@@ -1,130 +1,199 @@
-/* Background styling */
 body {
-  color: #505050;
-  background-image: linear-gradient(180deg, #70da7b 50%, #76d57a );
-  font-family: "Quicksand", sans-serif;
+  /* A deep forest-themed gradient */
+  background: radial-gradient(circle at center, #1b3a28 0%, #0d1117 100%);
+  color: #e0f2f1;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  overflow: hidden;
+  margin: 0;
+  height: 100vh;
 }
 
-/* Game container styling */
-#quiz-card {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
-  border-color: #505050;
-  background-color: white;
-  color: #505050;
-}
-
-/* Answer text styling */
-/* Removes list numbering */
-ol {
-  list-style-type: none;
-  padding-left: 0;
-}
-
-/* Button styling */
-
-#answer-buttons * {
-  font-weight: 500;
-  color: #505050;
-  border-radius: 10px;
-  border-color: #505050;
-  transition: all 1.0s ease;
-}
-
-#btnA {
-  background-color: #BEE5B0;
-}
-
-#btnA:hover {
-  background-color: white;
-  border-color: #BEE5B0;
-}
-
-#btnB {
-  background-color: #B6E9FF;
-}
-
-#btnB:hover {
-  background-color: white;
-  border-color: #B6E9FF;
-}
-
-#btnC {
-  background-color: #f1c0ba;
-}
-
-#btnC:hover {
-  background-color: white;
-  border-color: #f1c0ba;
-}
-
-#btnD {
-  background-color: #fbecc0;
-}
-
-#btnD:hover {
-  background-color: white;
-  border-color: #fbecc0;
-}
-
-/* Progress bar styling */
-
-.progress-bar {
-  width: 0%;
-  background-color: #bddfe3;
-}
-.progress {
+.game-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
   position: relative;
-  margin-left: 16px;
-}
-
-.progress-number {
-  font-size: 14px;
-  font-weight: bold;
   z-index: 10;
 }
 
-/* Image styling - Modernized */
-.quiz-image-container {
-    /* Fixed height prevents layout shifts (CLS) */
-    height: 300px;
-    width: 100%;
-    
-    /* Centering logic */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    
-    /* Aesthetics */
-    background-color: #f8fcf8; /* Very subtle green/white tint */
-    border: 1px solid #e0e0e0;
-    border-radius: 15px;
-    box-shadow: inset 0 0 15px rgba(0,0,0,0.03); /* Inner shadow for depth */
-    margin-bottom: 1.5rem;
-    overflow: hidden;
-    padding: 1rem;
+/* 
+   THE TREE (Progress Indicator)
+*/
+.tree {
+  font-size: 100px;
+  margin-bottom: 30px;
+  z-index: 10;
+  /* Initial size for the baby tree */
+  transform: scale(0.2); 
+  transition: transform 0.5s ease-out;
+  /* Adds a soft "Spirit Tree" glow */
+  filter: drop-shadow(0 0 15px rgba(76, 175, 80, 0.6));
+  user-select: none;
 }
 
-.quiz-image {
-    max-height: 100%;
-    max-width: 100%;
-    width: auto;
-    object-fit: contain;
-    
-    /* Visual pop */
-    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
-    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+/* Growth animation triggered by JS */
+.tree.animate-grow {
+  animation: growPop 0.6s ease-out forwards;
 }
 
-.quiz-image:hover {
-    transform: scale(1.1) rotate(2deg); 
-    cursor: pointer;
+/* 
+   THE QUIZ CARD (Glassmorphism Effect)
+*/
+#quiz-box {
+  background: radial-gradient(circle at center, #1b3a28 0%, #0d1117 100%); /* Same background as body */
+  backdrop-filter: blur(10px);        /* Blurs the background behind the box */
+  -webkit-backdrop-filter: blur(10px);
+  padding: 30px;
+  border-radius: 25px;
+  text-align: center;
+  width: 85%;
+  max-width: 450px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+  z-index: 20;
+}
+#score-display {
+  font-weight: bold;
+  color: #a5d6f7;
+  margin-bottom: 10px;
+  font-size: 1.1rem;
 }
 
-/* Mobile Responsiveness for Image */
-@media screen and (max-width: 576px) {
-  .quiz-image-container {
-      height: 180px; /* Smaller height on phones to keep buttons visible */
-      margin-bottom: 1rem;
+#question {
+  font-size: 1.4rem;
+  margin-bottom: 30px;
+  color: #ffffff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+
+.btn {
+  display: block;
+  width: 100%;
+  margin: 10px 0;
+  padding: 10px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  background-color: #555;
+  color: white;
+  font-weight: bold;
+  transition: 0.2s;
+}
+
+/* Button hover effect using CSS Transitions */
+.btn:hover {
+  background-color: #4CAF50;
+  transform: translateY(-2px);
+}
+
+/* 
+   ANSWER BUTTONS (Grid Layout)
+*/
+
+.btn {
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 15px 10px;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+/* Hover effects for buttons */
+.btn:hover {
+  background: #4CAF50; /* Eco Green */
+  border-color: #4CAF50;
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
+}
+
+/* When a button is clicked */
+.btn:active {
+  transform: translateY(-1px);
+}
+
+.hidden {
+  display: none;
+}
+
+/* 
+   UI FEEDBACK 
+*/
+#victory-msg {
+  color: #4CAF50;
+  font-size: 24px;
+  background: rgba(0, 0, 0, 0.9);
+  padding: 40px;
+  border-radius: 20px;
+  text-align: center;
+  border: 2px solid #4CAF50;
+  box-shadow: 0 0 30px rgba(76, 175, 80, 0.5);
+  animation: fadeIn 0.8s ease-out;
+  margin-top: 50px;
+}
+#restart-btn {
+  margin-top: 20px;
+  background: #2e7d32;
+  width: auto;
+  padding: 10px 30px;
+  display: inline-block;
+}
+
+#restart-btn:hover {
+  background: #1b5e20;
+}
+
+.hidden {
+  display: none !important;
+}
+
+#rainCanvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 5;
+  opacity: 0.8;
+}
+
+/* Tree Growth Keyframes */
+
+@keyframes growPop {
+  0% {
+    transform: scale(var(--prev-scale));
+  }
+
+  50% {
+    transform: scale(calc(var(--curr-scale) + 0.1));
+  }
+
+  100% {
+    transform: scale(var(--curr-scale));
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
   }
 }
