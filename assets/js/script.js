@@ -19,17 +19,26 @@ let score = 0; // NEW: Track score
 let raindrops = [];
 
 function loadQuestion() {
+    const scoreDisplay = document.getElementById('score-display');
+    const quizBox = document.getElementById('quiz-box');
+    const victoryMsg = document.getElementById('victory-msg');
+
     if (currentStep >= questions.length) {
-        document.getElementById('quiz-box').classList.add('hidden');
-        document.getElementById('victory-msg').classList.remove('hidden');
-        document.getElementById('final-score').innerText = `Final Score: ${score}`;
-        document.getElementById('score-display').innerText = `Score: ${score}`;
+        quizBox.classList.add('hidden');
+        victoryMsg.classList.remove('hidden');
+        document.getElementById('final-score').innerText = `Total Points: ${score} / 5`;
         return;
     }
+
+    // Refresh display
+    scoreDisplay.innerText = `Points: ${score}`;
+    scoreDisplay.style.color = "#a5d6f7"; 
+
     const data = questions[currentStep];
     document.getElementById('question').innerText = data.q;
     const optionsDiv = document.getElementById('options');
     optionsDiv.innerHTML = '';
+
     data.a.forEach((opt, i) => {
         const btn = document.createElement('button');
         btn.innerText = opt;
@@ -40,13 +49,18 @@ function loadQuestion() {
 }
 
 function checkAnswer(index) {
+    const scoreDisplay = document.getElementById('score-display');
     if (index === questions[currentStep].correct) {
-        score += 20; // NEW: Add points
+        // --- CORRECT: Add 1 point and grow tree ---
+        score += 1;
+        scoreDisplay.innerText = `Points: ${score}`;
+        scoreDisplay.style.color = "#4CAF50";
+
         const prevScale = 0.2 + currentStep * 0.4;
         currentStep++;
         const currScale = 0.2 + currentStep * 0.4;
 
-        // 1. Trigger Sound using Web Audio API methods
+        // 1. Trigger Sound and tree animation
         rainSound.currentTime = 0;
         rainSound.play().catch(e => console.log("Audio play blocked until user interact"));
 
@@ -65,9 +79,22 @@ function checkAnswer(index) {
             loadQuestion();
         }, 2500);
     } else {
-        score = Math.max(0, score - 5); // NEW: Penalty for wrong answer
-        document.getElementById('score-display').innerText = `Score: ${score}`;
-        shakeTree(); // Visual feedback for wrong answer
+        // --- WRONG: Subtract 1 point instantly ---
+        if (score > 0) { 
+            score -= 1; 
+        }
+        
+        // Force the text to update and flash red immediately
+        scoreDisplay.innerText = `Points: ${score}`;
+        scoreDisplay.style.color = "#ff5252";
+        void scoreDisplay.offsetWidth; // Force UI repaint
+
+        shakeTree();
+
+         // Reset color after a brief moment
+        setTimeout(() => {
+            scoreDisplay.style.color = "#a5d6f7";
+        }, 500);
     }
 }
 
@@ -105,6 +132,8 @@ function resetGame() {
     score = 0;
     tree.style.setProperty('--curr-scale', 0.2);
     tree.style.transform = "scale(0.2)";
+    tree.classList.remove('animate-grow');
+
     document.getElementById('victory-msg').classList.add('hidden');
     document.getElementById('quiz-box').classList.remove('hidden');
     loadQuestion();
@@ -113,4 +142,5 @@ function resetGame() {
 // NEW: Event Listener for Restart
 document.getElementById('restart-btn').onclick = resetGame;
 
+// Start the game
 loadQuestion();
