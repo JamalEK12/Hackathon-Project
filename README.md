@@ -36,3 +36,10 @@ Image sources:
 Sound effects sources:
 
 https://sound-effects.bbcrewind.co.uk/
+
+HTML Validator
+![HTML Picutre](<Screenshot 2026-02-02 104703-1.png>)
+
+
+CSS Validator
+![CSS Picture](<Screenshot 2026-02-02 103636.png>)
