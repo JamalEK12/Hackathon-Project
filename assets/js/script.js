@@ -15,12 +15,15 @@ const questions = [
 ];
 
 let currentStep = 0;
+let score = 0; // NEW: Track score
 let raindrops = [];
 
 function loadQuestion() {
-    if (currentStep >= 5) {
+    if (currentStep >= questions.length) {
         document.getElementById('quiz-box').classList.add('hidden');
         document.getElementById('victory-msg').classList.remove('hidden');
+        document.getElementById('final-score').innerText = `Final Score: ${score}`;
+        document.getElementById('score-display').innerText = `Score: ${score}`;
         return;
     }
     const data = questions[currentStep];
@@ -38,6 +41,7 @@ function loadQuestion() {
 
 function checkAnswer(index) {
     if (index === questions[currentStep].correct) {
+        score += 20; // NEW: Add points
         const prevScale = 0.2 + currentStep * 0.4;
         currentStep++;
         const currScale = 0.2 + currentStep * 0.4;
@@ -61,6 +65,8 @@ function checkAnswer(index) {
             loadQuestion();
         }, 2500);
     } else {
+        score = Math.max(0, score - 5); // NEW: Penalty for wrong answer
+        document.getElementById('score-display').innerText = `Score: ${score}`;
         shakeTree(); // Visual feedback for wrong answer
     }
 }
@@ -93,5 +99,18 @@ function triggerRain() {
     };
     animate();
 }
+// NEW: Reset Function
+function resetGame() {
+    currentStep = 0;
+    score = 0;
+    tree.style.setProperty('--curr-scale', 0.2);
+    tree.style.transform = "scale(0.2)";
+    document.getElementById('victory-msg').classList.add('hidden');
+    document.getElementById('quiz-box').classList.remove('hidden');
+    loadQuestion();
+}
+
+// NEW: Event Listener for Restart
+document.getElementById('restart-btn').onclick = resetGame;
 
 loadQuestion();
